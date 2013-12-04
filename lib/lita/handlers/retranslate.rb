@@ -8,7 +8,7 @@ module Lita
         config.command_only = true
       end
 
-      route %r{(retranslate) (.+)}i, :retranslate,           help: { "retranslate" => "invokes retranslatebot in an attempt to discover the lexical underpinnings of a given phrase"}
+      route %r{(retranslate) (.+)}i, :retranslate, help: {"retranslate" => "invokes retranslatebot in an attempt to discover the lexical underpinnings of a given phrase"}
 
       def retranslate(response)
         generate_retranslation(response)
@@ -20,17 +20,17 @@ module Lita
         return if Lita.config.handlers.retranslate.command_only && !response.message.command?
 
         text_to_translate ||= response.matches[0][0]
+        translation = {starting_phrase: text_to_translate}
 
         http_resp = http.post(
-          'http://retranslatebot.herokuapp.com',
-          api: true,
-          translation: text_to_translate,
+            'http://retranslatebot.herokuapp.com/translations',
+            api: true,
+            translation: translation,
         )
-        if http_resp.status == 200
-          response.reply http_resp.body
-        end
+        response.reply http_resp.body
       end
 
       Lita.register_handler(Retranslate)
     end
   end
+end
