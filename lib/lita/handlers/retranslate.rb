@@ -19,7 +19,7 @@ module Lita
       def generate_retranslation(response, text_to_translate: nil)
         return if Lita.config.handlers.retranslate.command_only && !response.message.command?
 
-        text_to_translate ||= response.matches[0][0]
+        text_to_translate ||= response.matches[0][1]
         translation = {starting_phrase: text_to_translate}
 
         http_resp = http.post(
