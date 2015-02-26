@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-retranslate"
-  spec.version       = "1.0"
+  spec.version       = "2.0"
   spec.authors       = ["Josh Skeen"]
   spec.email         = ["josh@bignerdranch.com"]
   spec.description   = %q{A Lita handler for generating retranslations.}
