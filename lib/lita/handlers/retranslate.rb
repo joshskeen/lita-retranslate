@@ -3,10 +3,7 @@ require "lita"
 module Lita
   module Handlers
     class Retranslate < Handler
-
-      def self.default_config(config)
-        config.command_only = true
-      end
+      config :command_only, default: true
 
       route %r{(retranslate) (.+)}i, :retranslate, help: {"retranslate" => "invokes retranslatebot in an attempt to discover the lexical underpinnings of a given phrase"}
 
